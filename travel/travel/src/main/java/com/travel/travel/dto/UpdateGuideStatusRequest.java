@@ -5,7 +5,7 @@ public class UpdateGuideStatusRequest {
     private String guideStatus;
     private String guideTime;
     private String guideDate;
-    private int excId;
+    private int guideId;
 
     public String getOrderId() {
         return orderId;
@@ -39,12 +39,12 @@ public class UpdateGuideStatusRequest {
         this.guideDate = guideDate;
     }
 
-    public int getExcId() {
-        return excId;
+    public int getGuideId() {
+        return guideId;
     }
 
-    public void setExcId(int excId) {
-        this.excId = excId;
+    public void setGuideId(int guideId) {
+        this.guideId = guideId;
     }
     @Override
     public String toString() {

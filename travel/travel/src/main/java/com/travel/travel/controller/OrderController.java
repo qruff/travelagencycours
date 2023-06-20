@@ -69,7 +69,7 @@ public class OrderController {
 
     @GetMapping("myorder")
     public ResponseEntity getMyOrder(@RequestParam("exploiterId") int exploiterId) throws JsonProcessingException{
-        System.out.println("MY ORDER for USER ID: " + exploiterId);
+        System.out.println("MY ORDER for EXPLOITER ID: " + exploiterId);
         List<Orders> exploiterOrder = orderDao.findByExploiter_id(exploiterId);
         OrderDataResponse orderResponse = new OrderDataResponse();
         List<MyOrderResponse> orderDatas = new ArrayList<>();
@@ -235,13 +235,13 @@ public class OrderController {
         System.out.println(guideRequest);
         List<Orders> orders = orderDao.findByOrderId(guideRequest.getOrderId());
         Exploiter guidePerson = null;
-        Optional<Exploiter> optionalGuidePerson = this.exploiterDao.findById(guideRequest.getExcId());
+        Optional<Exploiter> optionalGuidePerson = this.exploiterDao.findById(guideRequest.getGuideId());
         if (optionalGuidePerson.isPresent()){
             guidePerson = optionalGuidePerson.get();
         }
         for(Orders order:orders){
             order.setGuideAssigned(Constants.IsGuideAssigned.YES.value());
-            order.setGuidePersonId(guideRequest.getExcId());
+            order.setGuidePersonId(guideRequest.getGuideId());
             orderDao.save(order);
         }
 
@@ -284,7 +284,7 @@ public class OrderController {
 
     @GetMapping("guide/myorder")
     public ResponseEntity getMyGuideOrders(@RequestParam("guidePersonId") int guidePersonId) throws JsonProcessingException{
-        System.out.println("MY DELIVERY ORDER for EXPLOITER ID: " + guidePersonId);
+        System.out.println("MY  ORDER for EXPLOITER ID: " + guidePersonId);
         Exploiter person =null;
         Optional<Exploiter> oD = this.exploiterDao.findById(guidePersonId);
         if(oD.isPresent()){
